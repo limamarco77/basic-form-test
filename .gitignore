@@ -1,0 +1,27 @@
+# Ignore configuration files that may contain sensitive information.
+sites/*/settings*.php
+
+# Ignore paths that contain user-generated content.
+sites/*/files
+sites/*/private
+
+/nbproject/private/
+nbproject
+tags
+temp-*
+CHANGELOG.txt
+INSTALL.pgsql.txt
+UPGRADE.txt
+COPYRIGHT.txt
+LICENSE.txt
+INSTALL.mysql.txt
+INSTALL.txt
+MAINTAINERS.txt
+.buildpath
+.project
+.settings
+*.sublime-project
+*.sublime-workspace
+/.idea/
+.DS_Store
+.sass-cache/
