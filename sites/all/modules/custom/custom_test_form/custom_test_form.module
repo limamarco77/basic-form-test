@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @file.
+ *
+ * Module to provide a basic form.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function custom_test_form_menu() {
+
+  $items["custom-test-form"] = array(
+    'title' => 'Custom Test Form',
+    'description' => 'Custom Test Form',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('custom_test_form'),
+    'access arguments' => array('Access Custom Test Form'),
+    'file' => 'custom_test_form.pages.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ *
+ * @return array
+ */
+function custom_test_form_permission() {
+  return array(
+    'Access Custom Test Form' => array(
+      'title' => t('Allow user to access the custom test form'),
+      'description' => t('Allow user to access the custom test form'),
+    ),
+  );
+}
