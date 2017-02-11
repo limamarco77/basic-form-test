@@ -1,0 +1,5 @@
+name = Custom Test Form additions
+description = Provides additions to custom form
+package = Test
+version = "7.x-1.0"
+core = "7.x"

@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * @file.
+ *
+ * Module to provide additions to basic form.
+ */
+
+/**
+ * Implements hook_form_alter().
+ */
+function custom_test_form_addons_form_alter(&$form, &$form_state, $form_id) {
+  /**
+   * This unset the data submission from custom_test_form so that
+   * only one status message is displayed on form submission.
+   */
+  unset($form['#submit'][0]);
+
+  /**
+   * Check the form_id to make sure that the following code is executed
+   * only in the custom form.
+   */
+  if ($form_id == 'custom_test_form') {
+
+    /**
+     * Set the last_name field and use the #weight attribute
+     * to move it after the first_name field.
+     */
+    $form['last_name'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Last Name'),
+      '#default_value' => '',
+      '#description' => t('Please enter your last name'),
+      '#weight' => 0,
+    );
+
+    // Set callbacks for validation and form submission.
+    $form['#validate'][] = 'custom_form_addons_validate';
+    $form['#submit'][] = 'custom_form_addons_submit';
+
+    // Set validation function.
+    function custom_form_addons_validate($form, &$form_state) {
+      // Check if first_name field is empty.
+      if (empty($form_state['values']['first_name'])) {
+        form_set_error('first_name', 'First name cannot be empty');
+      }
+      // Check if last_name field is empty.
+      if (empty($form_state['values']['last_name'])) {
+        form_set_error('last_name', 'Last name cannot be empty');
+      }
+    }
+
+    // Set submission function.
+    function custom_form_addons_submit($form, &$form_state) {
+
+      drupal_set_message(t('Hello @first_name @last_name',
+        array(
+          '@first_name' => $form_state['values']['first_name'],
+          '@last_name' => $form_state['values']['last_name'])
+        )
+      );
+    }
+  }
+}
+
